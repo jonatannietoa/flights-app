@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/flights")
 public class AirportApiController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AirportApiController.class);
-
     private final FlightService flightService;
 
     public AirportApiController(FlightService flightService) {
