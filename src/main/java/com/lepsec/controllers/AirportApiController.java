@@ -1,12 +1,13 @@
 package com.lepsec.controllers;
 
-import com.lepsec.integration.flightradar24.FlightService;
-import com.lepsec.integration.flightradar24.FlightTraffic;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.lepsec.integration.flightradar24.FlightRadarAircraft;
+import com.lepsec.integration.flightradar24.FlightRadarService;
+import com.lepsec.integration.flightradar24.FlightRadarTraffic;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by jonatannietoa on 22/05/2016.
@@ -15,14 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/flights")
 public class AirportApiController {
 
-    private final FlightService flightService;
+    private final FlightRadarService flightRadarService;
 
-    public AirportApiController(FlightService flightService) {
-        this.flightService = flightService;
+    public AirportApiController(FlightRadarService flightRadarService) {
+        this.flightRadarService = flightRadarService;
     }
 
-    @RequestMapping("/now/traffic/{airport}")
-    public FlightTraffic getWeather(@PathVariable String airport) {
-        return this.flightService.getFlights(airport);
+    @RequestMapping(value = "/now/traffic/{airport}", method = GET)
+    public FlightRadarTraffic getTrafficByAirport(@PathVariable String airport) {
+        return this.flightRadarService.getFlights(airport);
+    }
+
+    @RequestMapping(value = "/now/aircraft/{registration}", method = GET)
+    public FlightRadarAircraft getAircraftByRegistration(@PathVariable String registration) {
+        return this.flightRadarService.getAircraft(registration);
     }
 }
