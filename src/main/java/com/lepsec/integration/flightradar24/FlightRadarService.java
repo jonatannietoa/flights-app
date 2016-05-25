@@ -26,17 +26,34 @@ public class FlightRadarService {
 
     private final RestTemplate restTemplate;
 
+    /**
+     * Instantiates a new Flight radar service.
+     *
+     * @param restTemplate the rest template
+     */
     @Autowired
     public FlightRadarService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Gets flights.
+     *
+     * @param airport the airport
+     * @return the flights
+     */
     public FlightRadarTraffic getFlights(String airport) {
         logger.info("Requesting current flights for {}", airport);
         URI url = new UriTemplate(FLIGHTS_URL).expand(airport);
         return invoke(url, FlightRadarTraffic.class);
     }
 
+    /**
+     * Gets aircraft.
+     *
+     * @param registration the registration
+     * @return the aircraft
+     */
     public FlightRadarAircraft getAircraft(String registration) {
         logger.info("Requesting aircraft {}", registration);
         URI url = new UriTemplate(AIRCRAFT_URL).expand(registration);

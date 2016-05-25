@@ -2,6 +2,7 @@ package com.lepsec.integration.flightradar24;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lepsec.domain.Aircraft;
+import com.lepsec.domain.Airport;
 import com.lepsec.domain.Flight;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.Map;
  */
 public class FlightRadarAircraft implements Serializable {
     private Aircraft aircraft = new Aircraft();
+
     private List<Flight> flights = new ArrayList<>();
 
     public Aircraft getAircraft() {
@@ -48,11 +50,38 @@ public class FlightRadarAircraft implements Serializable {
 
         for (int i = 0; i < data.size(); i++) {
             Flight flight = new Flight();
+            Airport origin = new Airport();
+            Airport destination = new Airport();
 
+            Map<String, Object> status = (Map<String, Object>) data.get(i).get("status");
+            flight.setStatus((String) status.get("text"));
 
+            Map<String, Object> generic = (Map<String, Object>) status.get("generic");
+            Map<String, Object> eventTime = (Map<String, Object>) generic.get("eventTime");
 
-            Map<String, Object> stringObjectMap =  data.get(i);
+            flight.setTime((Integer) eventTime.get("local"));
+            flight.setAircraft(this.aircraft);
 
+            Map<String, Object> airportMap = (Map<String, Object>) data.get(i).get("airport");
+            Map<String, Object> originMap = (Map<String, Object>) airportMap.get("origin");
+            Map<String, Object> destinationMap = (Map<String, Object>) airportMap.get("destination");
+
+            origin.setName((String) originMap.get("name"));
+            Map<String, Object> originCodes = (Map<String, Object>) originMap.get("code");
+            origin.setIata((String) originCodes.get("iata"));
+            origin.setIcao((String) originCodes.get("icao"));
+
+            if(!(destinationMap ==null)){
+                destination.setName((String) destinationMap.get("name"));
+                Map<String, Object> destinationCodes = (Map<String, Object>) destinationMap.get("code");
+                destination.setIata((String) destinationCodes.get("iata"));
+                destination.setIcao((String) destinationCodes.get("icao"));
+            }
+
+            flight.setFrom(origin);
+            flight.setTo(destination);
+
+            flights.add(flight);
         }
     }
 }
