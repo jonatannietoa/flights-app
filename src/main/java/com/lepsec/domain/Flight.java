@@ -1,18 +1,71 @@
 package com.lepsec.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 
 /**
  * Created by jonatannietoa on 22/05/2016.
  */
+@Table
 public class Flight implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Version
+    private Integer version;
+
+    @Column(name = "flight_time")
     private Integer time;
+
     private String flight;
+
+    @Column(name = "flight_from")
     private Airport from;
+
+    @Column(name = "flight_to")
     private Airport to;
+
     private Aircraft aircraft;
+
+    @Column(name = "flight_status")
     private String status;
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets version.
+     *
+     * @return the version
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets version.
+     *
+     * @param version the version
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     /**
      * Gets time.
@@ -55,6 +108,8 @@ public class Flight implements Serializable {
      *
      * @return the from
      */
+    @OneToOne
+    @JoinColumn
     public Airport getFrom() {
         return from;
     }
@@ -73,6 +128,8 @@ public class Flight implements Serializable {
      *
      * @return the to
      */
+    @OneToOne
+    @JoinColumn
     public Airport getTo() {
         return to;
     }
@@ -91,6 +148,8 @@ public class Flight implements Serializable {
      *
      * @return the aircraft
      */
+    @OneToOne
+    @JoinColumn
     public Aircraft getAircraft() {
         return aircraft;
     }
