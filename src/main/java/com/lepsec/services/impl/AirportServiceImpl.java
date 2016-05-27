@@ -1,0 +1,38 @@
+package com.lepsec.services.impl;
+
+import com.lepsec.controllers.AirportApiController;
+import com.lepsec.domain.Airport;
+import com.lepsec.domain.Flight;
+import com.lepsec.services.AirportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * Created by jnieto on 26/5/16.
+ */
+@Service
+public class AirportServiceImpl implements AirportService{
+    private AirportApiController airportApiController;
+
+    @Autowired
+    public AirportServiceImpl(AirportApiController airportApiController) {
+        this.airportApiController = airportApiController;
+    }
+
+    @Override
+    public Airport getAirportByIata(String iata) {
+        return airportApiController.getTrafficByAirport(iata).getAirport();
+    }
+
+    @Override
+    public List<Flight> getAirportArrivalsByIata(String iata) {
+        return airportApiController.getTrafficByAirport(iata).getArrivals();
+    }
+
+    @Override
+    public List<Flight> getAirportDeparturesByIata(String iata) {
+        return airportApiController.getTrafficByAirport(iata).getDepartures();
+    }
+}
