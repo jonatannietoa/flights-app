@@ -1,6 +1,6 @@
 package com.lepsec.services.impl;
 
-import com.lepsec.controllers.AirportApiController;
+import com.lepsec.controllers.FlightRadarApiController;
 import com.lepsec.domain.Airport;
 import com.lepsec.domain.Flight;
 import com.lepsec.services.AirportService;
@@ -14,25 +14,25 @@ import java.util.List;
  */
 @Service
 public class AirportServiceImpl implements AirportService{
-    private AirportApiController airportApiController;
+    private FlightRadarApiController flightRadarApiController;
 
     @Autowired
-    public AirportServiceImpl(AirportApiController airportApiController) {
-        this.airportApiController = airportApiController;
+    public AirportServiceImpl(FlightRadarApiController flightRadarApiController) {
+        this.flightRadarApiController = flightRadarApiController;
     }
 
     @Override
     public Airport getAirportByIata(String iata) {
-        return airportApiController.getTrafficByAirport(iata).getAirport();
+        return flightRadarApiController.getTrafficByAirport(iata).getAirport();
     }
 
     @Override
     public List<Flight> getAirportArrivalsByIata(String iata) {
-        return airportApiController.getTrafficByAirport(iata).getArrivals();
+        return flightRadarApiController.getTrafficByAirport(iata).getArrivals();
     }
 
     @Override
     public List<Flight> getAirportDeparturesByIata(String iata) {
-        return airportApiController.getTrafficByAirport(iata).getDepartures();
+        return flightRadarApiController.getTrafficByAirport(iata).getDepartures();
     }
 }

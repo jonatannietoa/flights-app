@@ -1,7 +1,6 @@
 package com.lepsec.domain;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 
 /**

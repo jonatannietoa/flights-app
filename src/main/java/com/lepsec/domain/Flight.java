@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by jonatannietoa on 22/05/2016.
  */
-@Table
+@Entity
 public class Flight implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
