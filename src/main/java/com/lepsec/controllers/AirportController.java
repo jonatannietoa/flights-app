@@ -3,6 +3,7 @@ package com.lepsec.controllers;
 import com.lepsec.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,5 +28,10 @@ public class AirportController {
         modelAndView.addObject("departures", airportService.getAirportDeparturesByIata(iata));
         modelAndView.setViewName("airport");
         return modelAndView;
+    }
+
+    @RequestMapping("/airport({iata}")
+    public ModelAndView getAirportByPathIata(@PathVariable("iata") String iata){
+        return this.getAirportByIata(iata);
     }
 }

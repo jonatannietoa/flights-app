@@ -3,6 +3,7 @@ package com.lepsec.controllers;
 import com.lepsec.integration.flightradar24.FlightRadarAircraft;
 import com.lepsec.integration.flightradar24.FlightRadarService;
 import com.lepsec.integration.flightradar24.FlightRadarTraffic;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class FlightRadarApiController {
         this.flightRadarService = flightRadarService;
     }
 
+    @Cacheable(value = "traffic", condition="#airport=='vll'")
     @RequestMapping(value = "/now/traffic/{airport}", method = GET)
     public FlightRadarTraffic getTrafficByAirport(@PathVariable String airport) {
         return this.flightRadarService.getFlights(airport);
