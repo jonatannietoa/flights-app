@@ -30,7 +30,7 @@ public class AirportController {
         return modelAndView;
     }
 
-    @RequestMapping("/airport({iata}")
+    @RequestMapping("/airport/{iata}")
     public ModelAndView getAirportByPathIata(@PathVariable("iata") String iata){
         return this.getAirportByIata(iata);
     }
