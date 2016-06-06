@@ -7,12 +7,12 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by jonatannietoa on 02/06/2016.
  */
-@ConfigurationProperties("flightstats.api")
-public class FlightStatsProperties {
+@ConfigurationProperties("flightstats")
+public class FlightsApplicationProperties {
     private final Api api = new Api();
 
     public Api getApi() {
-        return api;
+        return this.api;
     }
 
     /**
@@ -31,7 +31,7 @@ public class FlightStatsProperties {
          * @return the app id
          */
         public String getAppId() {
-            return appId;
+            return this.appId;
         }
 
         /**
@@ -49,7 +49,7 @@ public class FlightStatsProperties {
          * @return the app key
          */
         public String getAppKey() {
-            return appKey;
+            return this.appKey;
         }
 
         /**

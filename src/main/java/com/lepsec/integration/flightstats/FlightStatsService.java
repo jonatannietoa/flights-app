@@ -1,6 +1,6 @@
 package com.lepsec.integration.flightstats;
 
-import com.lepsec.configuration.FlightStatsProperties;
+import com.lepsec.configuration.FlightsApplicationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ public class FlightStatsService {
 
     private final RestTemplate restTemplate;
 
-    private String appId;
-    private String appKey;
+    private final String appId;
+    private final String appKey;
 
     /**
      * Instantiates a new Flight stats service.
@@ -34,10 +34,10 @@ public class FlightStatsService {
      * @param properties   the properties
      */
     @Autowired
-    public FlightStatsService(RestTemplate restTemplate, FlightStatsProperties properties) {
+    public FlightStatsService(RestTemplate restTemplate, FlightsApplicationProperties properties) {
         this.restTemplate = restTemplate;
-        this.appId=properties.getApi().getAppId();
-        this.appKey=properties.getApi().getAppKey();
+        this.appId = properties.getApi().getAppId();
+        this.appKey = properties.getApi().getAppKey();
     }
 
     /**
