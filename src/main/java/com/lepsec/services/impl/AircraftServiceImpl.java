@@ -1,6 +1,6 @@
 package com.lepsec.services.impl;
 
-import com.lepsec.controllers.FlightRadarApiController;
+import com.lepsec.controllers.FlightStatsApiController;
 import com.lepsec.repositories.AircraftRepository;
 import com.lepsec.services.AircraftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ public class AircraftServiceImpl implements AircraftService {
 
     private AircraftRepository aircraftRepository;
 
-    private FlightRadarApiController flightRadarApiController;
+    private FlightStatsApiController flightStatsApiController;
 
     @Autowired
-    public AircraftServiceImpl(AircraftRepository aircraftRepository, FlightRadarApiController flightRadarApiController) {
+    public AircraftServiceImpl(AircraftRepository aircraftRepository, FlightStatsApiController flightStatsApiController) {
         this.aircraftRepository = aircraftRepository;
-        this.flightRadarApiController = flightRadarApiController;
+        this.flightStatsApiController = flightStatsApiController;
     }
 
     @Override
     public void saveAircraft(String registration) {
-        this.aircraftRepository.save(flightRadarApiController.getAircraftByRegistration(registration).getAircraft());
+//        this.aircraftRepository.save(flightStatsApiController.getAircraftByRegistration(registration).getAircraft());
     }
 }

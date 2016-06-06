@@ -25,6 +25,7 @@ public class FlightStatsService {
     private final RestTemplate restTemplate;
 
     private final String appId;
+
     private final String appKey;
 
     /**
